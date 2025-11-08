@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - PhD Student</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --accent: #ec4899;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            scroll-behavior: smooth;
+            background: var(--bg);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.25rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #home {
+            padding-top: 8rem;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            min-height: 100vh;
+        }
+
+        .home-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 3rem;
+        }
+
+        .photo-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin-bottom: 1rem;
+        }
+
+        .photo-container::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            background: var(--bg-gradient);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .home-text {
+            max-width: 800px;
+        }
+
+        .home-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .home-text h2 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .home-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+            color: var(--primary);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+            background: var(--primary);
+            color: white;
+        }
+
+        h2.section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: 800;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .publication-item, .experience-item, .project-item, .blog-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+            border-left: 5px solid var(--primary);
+        }
+
+        .publication-item:hover, .experience-item:hover, .project-item:hover, .blog-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .publication-item h3, .experience-item h3, .project-item h3, .blog-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .meta {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .pub-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .pub-link.code {
+            background: var(--accent);
+        }
+
+        .pub-link.code:hover {
+            background: #db2777;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea25, #764ba225);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .contact-form button {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-item svg {
+            width: 28px;
+            height: 28px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .home-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            h2.section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" id="navName">Your Name</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="home-content">
+            <div class="photo-container">
+                <img src="photo.png" alt="Your Photo" id="profilePhoto">
+            </div>
+            <div class="home-text">
+                <h1 id="homeName">Your Full Name</h1>
+                <h2 id="homeTitle">PhD Student in Computer Science</h2>
+                <p id="homeBio">Brief introduction about your research interests, academic background, and what drives your passion for your field.</p>
+            </div>
+            <div class="social-links" id="socialLinks"></div>
+        </div>
+    </section>
+
+    <section id="publications">
+        <h2 class="section-title">Publications</h2>
+        <div id="publicationsList"></div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div id="experienceList"></div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div id="projectsList"></div>
+    </section>
+
+    <section id="blog">
+        <h2 class="section-title">Blog</h2>
+        <div id="blogList"></div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid">
+            <div class="contact-form">
+                <input type="text" placeholder="Your Name" id="contactName">
+                <input type="email" placeholder="Your Email" id="contactEmail">
+                <textarea rows="5" placeholder="Your Message" id="contactMessage"></textarea>
+                <button onclick="handleContact()">Send Message</button>
+            </div>
+            <div class="contact-info" id="contactInfo"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> <span id="footerName">Your Name</span>. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Configuration - UPDATE THIS SECTION WITH YOUR INFORMATION
+        const config = {
+            name: "Your Full Name",
+            title: "PhD Student in Computer Science",
+            university: "Your University",
+            bio: "Brief introduction about your research interests, academic background, and what drives your passion for your field. You can write multiple sentences here describing your work and interests.",
+            
+            contact: {
+                email: "your.email@university.edu",
+                phone: "+1 234 567 8900",
+                location: "City, Country",
+                github: "yourgithub",
+                linkedin: "yourlinkedin",
+                scholar: "your-google-scholar-id",
+                twitter: "yourtwitter"  // optional
+            },
+
+            publications: [
+                {
+                    title: "Your Paper Title Here: A Comprehensive Study",
+                    authors: "Your Name, Co-Author Name, Another Author",
+                    venue: "Conference/Journal Name 2024",
+                    description: "Brief description of the paper and its contributions. Explain the key findings and impact of your research.",
+                    paperLink: "https://doi.org/your-paper",
+                    codeLink: "https://github.com/yourusername/paper-code"  // optional
+                },
+                {
+                    title: "Another Research Paper on Machine Learning",
+                    authors: "Co-Author, Your Name, Another Author",
+                    venue: "Top Journal Name 2023",
+                    description: "Brief description of this research work and its significance in the field.",
+                    paperLink: "https://doi.org/your-paper",
+                    codeLink: "https://github.com/yourusername/paper-code"
+                }
+            ],
+
+            experience: [
+                {
+                    title: "PhD Student",
+                    organization: "Your University",
+                    period: "2021 - Present",
+                    description: "Working on research in [your field]. Conducting experiments and publishing papers. Advisor: Prof. Name.",
+                    tags: ["Research", "Teaching", "Machine Learning"]
+                },
+                {
+                    title: "Research Intern",
+                    organization: "Company/Lab Name",
+                    period: "Summer 2023",
+                    description: "Description of your internship work and achievements. Developed new algorithms and contributed to major projects.",
+                    tags: ["Machine Learning", "NLP", "Deep Learning"]
+                }
+            ],
+
+            projects: [
+                {
+                    title: "Project Name",
+                    description: "Description of your project, its goals, and outcomes. Explain the technologies used and the impact of the project.",
+                    tags: ["Python", "TensorFlow", "Research"],
+                    link: "https://github.com/yourusername/project"
+                },
+                {
+                    title: "Another Project",
+                    description: "Description of another interesting project you've worked on. Highlight the challenges and solutions.",
+                    tags: ["Web Development", "Data Analysis", "React"],
+                    link: "https://github.com/yourusername/project2"
+                }
+            ],
+
+            blog: [
+                {
+                    title: "Understanding Transformer Architecture",
+                    date: "2024-01-15",
+                    excerpt: "A deep dive into how transformers work and why they're revolutionary in natural language processing...",
+                    link: "#"
+                },
+                {
+                    title: "My Journey into PhD",
+                    date: "2023-09-01",
+                    excerpt: "Reflections on starting my PhD program and what I've learned so far about research and academia...",
+                    link: "#"
+                }
+            ]
+        };
+
+        // Initialize page
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.getElementById('navName').textContent = config.name.split(' ')[0];
+        document.getElementById('homeName').textContent = config.name;
+        document.getElementById('homeTitle').textContent = config.title;
+        document.getElementById('homeBio').textContent = config.bio;
+        document.getElementById('footerName').textContent = config.name;
+
+        // Render social links
+        const socialLinks = document.getElementById('socialLinks');
+        const socials = [
+            { icon: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z', link: `https://github.com/${config.contact.github}`, label: 'GitHub' },
+            { icon: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z', link: `https://linkedin.com/in/${config.contact.linkedin}`, label: 'LinkedIn' },
+            { icon: 'M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.5c-3.59 0-6.5-2.91-6.5-6.5s2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5-2.91 6.5-6.5 6.5zm.5-10v3.75l3.25 1.95-.75 1.23L11 13V8.5h1.5z', link: `https://scholar.google.com/citations?user=${config.contact.scholar}`, label: 'Google Scholar' }
+        ];
+
+        socials.forEach(social => {
+            socialLinks.innerHTML += `
+                <a href="${social.link}" target="_blank" title="${social.label}">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="${social.icon}"/>
+                    </svg>
+                </a>
+            `;
+        });
+
+        // Render publications
+        const pubList = document.getElementById('publicationsList');
+        config.publications.forEach(pub => {
+            const links = `
+                <div class="pub-links">
+                    <a href="${pub.paperLink}" class="pub-link paper" target="_blank">
+                        📄 Paper
+                    </a>
+                    ${pub.codeLink ? `<a href="${pub.codeLink}" class="pub-link code" target="_blank">💻 Code</a>` : ''}
+                </div>
+            `;
+            
+            pubList.innerHTML += `
+                <div class="publication-item fade-in">
+                    <h3>${pub.title}</h3>
+                    <p class="meta">${pub.authors}</p>
+                    <p class="meta"><em>${pub.venue}</em></p>
+                    <p>${pub.description}</p>
+                    ${links}
+                </div>
+            `;
+        });
+
+        // Render experience
+        const expList = document.getElementById('experienceList');
+        config.experience.forEach(exp => {
+            expList.innerHTML += `
+                <div class="experience-item fade-in">
+                    <h3>${exp.title}</h3>
+                    <p class="meta">${exp.organization} | ${exp.period}</p>
+                    <p>${exp.description}</p>
+                    <div class="tags">
+                        ${exp.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        // Render projects
+        const projList = document.getElementById('projectsList');
+        config.projects.forEach(proj => {
+            projList.innerHTML += `
+                <div class="project-item fade-in">
+                    <h3>${proj.title}</h3>
+                    <p>${proj.description}</p>
+                    <div class="tags">
+                        ${proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    ${proj.link ? `<div class="pub-links"><a href="${proj.link}" class="pub-link" target="_blank">🔗 View Project</a></div>` : ''}
+                </div>
+            `;
+        });
+
+        // Render blog
+        const blogList = document.getElementById('blogList');
+        config.blog.forEach(post => {
+            blogList.innerHTML += `
+                <div class="blog-item fade-in">
+                    <h3>${post.title}</h3>
+                    <p class="meta">${post.date}</p>
+                    <p>${post.excerpt}</p>
+                    ${post.link ? `<div class="pub-links"><a href="${post.link}" class="pub-link">📖 Read More</a></div>` : ''}
+                </div>
+            `;
+        });
+
+        // Render contact info
+        const contactInfo = document.getElementById('contactInfo');
+        contactInfo.innerHTML = `
+            <div class="contact-item">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <a href="mailto:${config.contact.email}">${config.contact.email}</a>
+            </div>
+            <div class="contact-item">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                <span>${config.contact.phone}</span>
+            </div>
+            <div class="contact-item">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <span>${config.contact.location}</span>
+            </div>
+        `;
+
+        function handleContact() {
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const message = document.getElementById('contactMessage').value;
+            
+            if (name && email && message) {
+                window.location.href = `mailto:${config.contact.email}?subject=Contact from ${name}&body=${message}`;
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+    </script>
+</body>
+</html>
