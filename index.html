@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANIK DEV NATH - Prospective PhD Student</title>
+    <title>Your Name - PhD Student</title>
     <style>
         * {
             margin: 0;
@@ -12,40 +12,72 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --accent: #ec4899;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --bg: #ffffff;
-            --bg-alt: #f8fafc;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            scroll-behavior: smooth;
-            background: var(--bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            z-index: 100;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         nav {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.25rem 3rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -54,291 +86,433 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: var(--bg-gradient);
+            background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
         .nav-links a {
+            color: var(--text-secondary);
             text-decoration: none;
-            color: var(--text);
             font-weight: 500;
+            font-size: 0.95rem;
             transition: all 0.3s;
             position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a:after {
+        .nav-links a::after {
             content: '';
             position: absolute;
+            bottom: 0;
+            left: 0;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--primary);
+            background: var(--gradient-3);
             transition: width 0.3s;
         }
 
-        .nav-links a:hover:after {
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
             width: 100%;
         }
 
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        /* Sections */
         section {
+            position: relative;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 5rem 3rem;
+            padding: 6rem 2rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
+        /* Home Section */
         #home {
             padding-top: 8rem;
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            min-height: 100vh;
         }
 
         .home-content {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            text-align: center;
-            gap: 3rem;
-        }
-
-        .photo-container {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            margin-bottom: 1rem;
-        }
-
-        .photo-container::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            background: var(--bg-gradient);
-            border-radius: 50%;
-            z-index: -1;
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 6px solid white;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
 
         .home-text {
-            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
         }
 
         .home-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            background: var(--bg-gradient);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .home-text h2 {
-            font-size: 1.75rem;
-            color: var(--primary);
+        .home-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-light);
             margin-bottom: 1.5rem;
             font-weight: 600;
         }
 
         .home-text p {
-            font-size: 1.2rem;
-            color: var(--text-light);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
             line-height: 1.8;
+            margin-bottom: 2rem;
         }
 
-        .social-links {
+        .cta-buttons {
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--card-shadow);
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
             transition: all 0.3s;
-            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
         }
 
-        .social-links a:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-            background: var(--primary);
+        .btn-primary {
+            background: var(--gradient-3);
             color: white;
+            border: none;
         }
 
-        h2.section-title {
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+            border-color: var(--primary);
+        }
+
+        /* Photo container */
+        .photo-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .photo-wrapper {
+            position: relative;
+            padding: 1rem;
+        }
+
+        .photo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-3);
+            border-radius: 2rem;
+            opacity: 0.5;
+            filter: blur(30px);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .photo-wrapper img {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 2rem;
+            border: 3px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--bg-card);
+            padding: 1rem 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card.top {
+            top: 10%;
+            right: -10%;
+        }
+
+        .floating-card.bottom {
+            bottom: 10%;
+            left: -10%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Section Title */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-title {
             font-size: 3rem;
-            margin-bottom: 3rem;
             font-weight: 800;
-            background: var(--bg-gradient);
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-align: center;
         }
 
-        .publication-item, .experience-item, .project-item, .blog-item {
-            background: white;
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
             padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 1rem;
-            box-shadow: var(--card-shadow);
             transition: all 0.3s;
-            border-left: 5px solid var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .publication-item:hover, .experience-item:hover, .project-item:hover, .blog-item:hover {
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-3);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .publication-item h3, .experience-item h3, .project-item h3, .blog-item h3 {
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
             font-size: 1.5rem;
             margin-bottom: 0.75rem;
-            color: var(--text);
+            color: var(--text-primary);
             font-weight: 700;
         }
 
-        .meta {
-            color: var(--text-light);
+        .card-meta {
+            color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
+        .card-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Publication Links */
         .pub-links {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .pub-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1.25rem;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
+            padding: 0.6rem 1.25rem;
             border-radius: 0.5rem;
             font-weight: 600;
             font-size: 0.9rem;
+            text-decoration: none;
             transition: all 0.3s;
         }
 
-        .pub-link:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+        .pub-link.paper {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .pub-link.paper:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .pub-link.code {
-            background: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
         }
 
         .pub-link.code:hover {
-            background: #db2777;
+            background: var(--accent);
+            color: white;
         }
 
+        /* Tags */
         .tags {
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
-            margin-top: 1.25rem;
         }
 
         .tag {
-            background: linear-gradient(135deg, #667eea25, #764ba225);
-            color: var(--primary);
             padding: 0.4rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
             border-radius: 2rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
+        /* Contact Section */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            margin-top: 3rem;
         }
 
         .contact-form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
         }
 
-        .contact-form input, .contact-form textarea {
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
             padding: 1rem;
-            border: 2px solid #e2e8f0;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
             border-radius: 0.75rem;
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 1rem;
             transition: all 0.3s;
         }
 
-        .contact-form input:focus, .contact-form textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
         }
 
         .contact-form button {
-            background: var(--bg-gradient);
-            color: white;
+            width: 100%;
             padding: 1rem;
+            background: var(--gradient-3);
             border: none;
             border-radius: 0.75rem;
-            font-size: 1.1rem;
+            color: white;
             font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .contact-form button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--card-shadow-hover);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .contact-item {
@@ -346,64 +520,87 @@
             align-items: center;
             gap: 1.5rem;
             padding: 1.5rem;
-            background: white;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             border-radius: 1rem;
-            box-shadow: var(--card-shadow);
             transition: all 0.3s;
         }
 
         .contact-item:hover {
             transform: translateX(10px);
+            border-color: var(--primary);
         }
 
-        .contact-item svg {
-            width: 28px;
-            height: 28px;
-            color: var(--primary);
+        .contact-item-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-3);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
-        .contact-item a {
-            color: var(--text);
+        .contact-item-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .contact-item-content a {
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
         }
 
-        footer {
-            background: var(--text);
+        .contact-item-content span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-3);
             color: white;
+            border-color: transparent;
+            transform: translateY(-5px);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 2.5rem;
+            color: var(--text-muted);
         }
 
-        @media (max-width: 768px) {
-            .home-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            section {
-                padding: 3rem 1.5rem;
-            }
-
-            nav {
-                padding: 1rem 1.5rem;
-            }
-
-            h2.section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scroll animations */
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -415,67 +612,214 @@
             }
         }
 
-        .fade-in {
-            animation: fadeInUp 0.6s ease-out;
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .home-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .photo-container {
+                order: -1;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 0;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .home-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .home-text .subtitle {
+                font-size: 1.25rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading animation for cards */
+        .cards-container > * {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .cards-container > *:nth-child(1) { animation-delay: 0.1s; }
+        .cards-container > *:nth-child(2) { animation-delay: 0.2s; }
+        .cards-container > *:nth-child(3) { animation-delay: 0.3s; }
+        .cards-container > *:nth-child(4) { animation-delay: 0.4s; }
+        .cards-container > *:nth-child(5) { animation-delay: 0.5s; }
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav>
-            <div class="logo" id="navName">ANIK DEV NATH</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="logo" id="navName">Portfolio</div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#publications" onclick="closeMenu()">Publications</a></li>
+                <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#blog" onclick="closeMenu()">Blog</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home">
         <div class="home-content">
-            <div class="photo-container">
-                <img src="picture.JPG" alt="Your Photo" id="profilePhoto">
-            </div>
             <div class="home-text">
                 <h1 id="homeName">Your Full Name</h1>
-                <h2 id="homeTitle">PhD Student in Computer Science</h2>
-                <p id="homeBio">Brief introduction about your research interests, academic background, and what drives your passion for your field.</p>
+                <div class="subtitle" id="homeTitle">PhD Student in Computer Science</div>
+                <p id="homeBio">Passionate researcher exploring the intersection of artificial intelligence and human cognition. Dedicated to advancing the field through innovative research and collaborative problem-solving.</p>
+                <div class="cta-buttons">
+                    <a href="#publications" class="btn btn-primary">
+                        View Publications
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+                <div class="social-links" id="socialLinks"></div>
             </div>
-            <div class="social-links" id="socialLinks"></div>
+            <div class="photo-container">
+                <div class="photo-wrapper">
+                    <img src="photo.png" alt="Profile Photo" id="profilePhoto">
+                </div>
+                <div class="floating-card top">
+                    <div style="color: var(--accent-light); font-weight: 700;">5+</div>
+                    <div style="color: var(--text-muted); font-size: 0.9rem;">Publications</div>
+                </div>
+                <div class="floating-card bottom">
+                    <div style="color: var(--accent-light); font-weight: 700;">3+</div>
+                    <div style="color: var(--text-muted); font-size: 0.9rem;">Years Research</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="publications">
-        <h2 class="section-title">Publications</h2>
-        <div id="publicationsList"></div>
+        <div class="section-header">
+            <h2 class="section-title">Publications</h2>
+            <p class="section-subtitle">Research papers and academic contributions</p>
+        </div>
+        <div class="cards-container" id="publicationsList"></div>
     </section>
 
     <section id="experience">
-        <h2 class="section-title">Experience</h2>
-        <div id="experienceList"></div>
+        <div class="section-header">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-subtitle">Academic and professional journey</p>
+        </div>
+        <div class="cards-container" id="experienceList"></div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div id="projectsList"></div>
+        <div class="section-header">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">Research projects and open-source contributions</p>
+        </div>
+        <div class="cards-container" id="projectsList"></div>
     </section>
 
     <section id="blog">
-        <h2 class="section-title">Blog</h2>
-        <div id="blogList"></div>
+        <div class="section-header">
+            <h2 class="section-title">Blog</h2>
+            <p class="section-subtitle">Thoughts, insights, and tutorials</p>
+        </div>
+        <div class="cards-container" id="blogList"></div>
     </section>
 
     <section id="contact">
-        <h2 class="section-title">Contact</h2>
+        <div class="section-header">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Let's collaborate on something amazing</p>
+        </div>
         <div class="contact-grid">
             <div class="contact-form">
-                <input type="text" placeholder="Your Name" id="contactName">
-                <input type="email" placeholder="Your Email" id="contactEmail">
-                <textarea rows="5" placeholder="Your Message" id="contactMessage"></textarea>
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="contactName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" id="contactEmail" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="contactMessage" placeholder="Your message here..."></textarea>
+                </div>
                 <button onclick="handleContact()">Send Message</button>
             </div>
             <div class="contact-info" id="contactInfo"></div>
@@ -487,12 +831,12 @@
     </footer>
 
     <script>
-        // Configuration - UPDATE THIS SECTION WITH YOUR INFORMATION
+        // Configuration
         const config = {
             name: "Your Full Name",
             title: "PhD Student in Computer Science",
             university: "Your University",
-            bio: "Brief introduction about your research interests, academic background, and what drives your passion for your field. You can write multiple sentences here describing your work and interests.",
+            bio: "Passionate researcher exploring the intersection of artificial intelligence and human cognition. Dedicated to advancing the field through innovative research and collaborative problem-solving.",
             
             contact: {
                 email: "your.email@university.edu",
@@ -501,77 +845,77 @@
                 github: "yourgithub",
                 linkedin: "yourlinkedin",
                 scholar: "your-google-scholar-id",
-                twitter: "yourtwitter"  // optional
+                twitter: "yourtwitter"
             },
 
             publications: [
                 {
-                    title: "Your Paper Title Here: A Comprehensive Study",
+                    title: "Deep Learning Approaches for Natural Language Understanding",
                     authors: "Your Name, Co-Author Name, Another Author",
-                    venue: "Conference/Journal Name 2024",
-                    description: "Brief description of the paper and its contributions. Explain the key findings and impact of your research.",
-                    paperLink: "https://doi.org/your-paper",
-                    codeLink: "https://github.com/yourusername/paper-code"  // optional
+                    venue: "NeurIPS 2024",
+                    description: "We present a novel architecture for natural language understanding that achieves state-of-the-art results on multiple benchmarks. Our approach combines transformer-based models with attention mechanisms to improve semantic comprehension.",
+                    paperLink: "https://arxiv.org/",
+                    codeLink: "https://github.com/yourusername/project"
                 },
                 {
-                    title: "Another Research Paper on Machine Learning",
+                    title: "Efficient Training Methods for Large Language Models",
                     authors: "Co-Author, Your Name, Another Author",
-                    venue: "Top Journal Name 2023",
-                    description: "Brief description of this research work and its significance in the field.",
-                    paperLink: "https://doi.org/your-paper",
-                    codeLink: "https://github.com/yourusername/paper-code"
+                    venue: "ICML 2023",
+                    description: "This paper introduces efficient training techniques that reduce computational requirements by 40% while maintaining model performance. We demonstrate the effectiveness of our approach on various tasks.",
+                    paperLink: "https://arxiv.org/",
+                    codeLink: "https://github.com/yourusername/project2"
                 }
             ],
 
             experience: [
                 {
-                    title: "PhD Student",
+                    title: "PhD Candidate",
                     organization: "Your University",
                     period: "2021 - Present",
-                    description: "Working on research in [your field]. Conducting experiments and publishing papers. Advisor: Prof. Name.",
-                    tags: ["Research", "Teaching", "Machine Learning"]
+                    description: "Conducting research in natural language processing and machine learning. Published multiple papers in top-tier conferences. Teaching assistant for undergraduate courses in AI and data structures.",
+                    tags: ["Deep Learning", "NLP", "Research", "Teaching"]
                 },
                 {
                     title: "Research Intern",
-                    organization: "Company/Lab Name",
+                    organization: "Tech Company / Research Lab",
                     period: "Summer 2023",
-                    description: "Description of your internship work and achievements. Developed new algorithms and contributed to major projects.",
-                    tags: ["Machine Learning", "NLP", "Deep Learning"]
+                    description: "Developed novel algorithms for large-scale data processing. Collaborated with a team of researchers on cutting-edge ML projects. Implemented and deployed models in production environments.",
+                    tags: ["Machine Learning", "Python", "TensorFlow", "Research"]
                 }
             ],
 
             projects: [
                 {
-                    title: "Project Name",
-                    description: "Description of your project, its goals, and outcomes. Explain the technologies used and the impact of the project.",
-                    tags: ["Python", "TensorFlow", "Research"],
-                    link: "https://github.com/yourusername/project"
+                    title: "Neural Machine Translation System",
+                    description: "Built an end-to-end neural machine translation system using transformer architecture. Achieved competitive BLEU scores on multiple language pairs. Open-sourced the implementation for the research community.",
+                    tags: ["NLP", "PyTorch", "Transformers"],
+                    link: "https://github.com/yourusername/nmt-project"
                 },
                 {
-                    title: "Another Project",
-                    description: "Description of another interesting project you've worked on. Highlight the challenges and solutions.",
-                    tags: ["Web Development", "Data Analysis", "React"],
-                    link: "https://github.com/yourusername/project2"
+                    title: "Sentiment Analysis Framework",
+                    description: "Developed a comprehensive framework for sentiment analysis supporting multiple languages and domains. Includes pre-trained models and easy-to-use APIs for researchers and developers.",
+                    tags: ["NLP", "Python", "BERT", "API"],
+                    link: "https://github.com/yourusername/sentiment-analysis"
                 }
             ],
 
             blog: [
                 {
-                    title: "Understanding Transformer Architecture",
-                    date: "2024-01-15",
-                    excerpt: "A deep dive into how transformers work and why they're revolutionary in natural language processing...",
+                    title: "Understanding Attention Mechanisms in Transformers",
+                    date: "October 15, 2024",
+                    excerpt: "A comprehensive guide to understanding how attention mechanisms work in transformer models. We break down the mathematics and provide intuitive explanations with visual examples.",
                     link: "#"
                 },
                 {
-                    title: "My Journey into PhD",
-                    date: "2023-09-01",
-                    excerpt: "Reflections on starting my PhD program and what I've learned so far about research and academia...",
+                    title: "Best Practices for PhD Research",
+                    date: "September 1, 2024",
+                    excerpt: "Lessons learned from three years of PhD research. Time management strategies, collaboration tips, and how to stay motivated during challenging periods of research.",
                     link: "#"
                 }
             ]
         };
 
-        // Initialize page
+        // Initialize
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         document.getElementById('navName').textContent = config.name.split(' ')[0];
         document.getElementById('homeName').textContent = config.name;
@@ -579,28 +923,45 @@
         document.getElementById('homeBio').textContent = config.bio;
         document.getElementById('footerName').textContent = config.name;
 
-        // Render social links
+        // Social Links
         const socialLinks = document.getElementById('socialLinks');
         const socials = [
             { icon: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z', link: `https://github.com/${config.contact.github}`, label: 'GitHub' },
             { icon: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z', link: `https://linkedin.com/in/${config.contact.linkedin}`, label: 'LinkedIn' },
-            { icon: 'M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.5c-3.59 0-6.5-2.91-6.5-6.5s2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5-2.91 6.5-6.5 6.5zm.5-10v3.75l3.25 1.95-.75 1.23L11 13V8.5h1.5z', link: `https://scholar.google.com/citations?user=${config.contact.scholar}`, label: 'Google Scholar' }
+            { icon: 'M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z', link: `https://twitter.com/${config.contact.twitter}`, label: 'Twitter' },
+            { icon: 'M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z', link: `https://scholar.google.com/citations?user=${config.contact.scholar}`, label: 'Google Scholar' }
         ];
 
         socials.forEach(social => {
-            socialLinks.innerHTML += `
-                <a href="${social.link}" target="_blank" title="${social.label}">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                        <path d="${social.icon}"/>
-                    </svg>
-                </a>
-            `;
+            const a = document.createElement('a');
+            a.href = social.link;
+            a.className = 'social-link';
+            a.target = '_blank';
+            a.title = social.label;
+            a.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="${social.icon}"/></svg>`;
+            socialLinks.appendChild(a);
         });
 
-        // Render publications
+        // Publications
         const pubList = document.getElementById('publicationsList');
         config.publications.forEach(pub => {
-            const links = `
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${pub.title}</h3>
+                <div class="card-meta">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
+                    </svg>
+                    ${pub.authors}
+                </div>
+                <div class="card-meta">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5Z"/>
+                    </svg>
+                    ${pub.venue}
+                </div>
+                <div class="card-content">${pub.description}</div>
                 <div class="pub-links">
                     <a href="${pub.paperLink}" class="pub-link paper" target="_blank">
                         📄 Paper
@@ -608,89 +969,161 @@
                     ${pub.codeLink ? `<a href="${pub.codeLink}" class="pub-link code" target="_blank">💻 Code</a>` : ''}
                 </div>
             `;
-            
-            pubList.innerHTML += `
-                <div class="publication-item fade-in">
-                    <h3>${pub.title}</h3>
-                    <p class="meta">${pub.authors}</p>
-                    <p class="meta"><em>${pub.venue}</em></p>
-                    <p>${pub.description}</p>
-                    ${links}
-                </div>
-            `;
+            pubList.appendChild(card);
         });
 
-        // Render experience
+        // Experience
         const expList = document.getElementById('experienceList');
         config.experience.forEach(exp => {
-            expList.innerHTML += `
-                <div class="experience-item fade-in">
-                    <h3>${exp.title}</h3>
-                    <p class="meta">${exp.organization} | ${exp.period}</p>
-                    <p>${exp.description}</p>
-                    <div class="tags">
-                        ${exp.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                    </div>
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${exp.title}</h3>
+                <div class="card-meta">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>
+                    </svg>
+                    ${exp.organization} | ${exp.period}
+                </div>
+                <div class="card-content">${exp.description}</div>
+                <div class="tags">
+                    ${exp.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
             `;
+            expList.appendChild(card);
         });
 
-        // Render projects
+        // Projects
         const projList = document.getElementById('projectsList');
         config.projects.forEach(proj => {
-            projList.innerHTML += `
-                <div class="project-item fade-in">
-                    <h3>${proj.title}</h3>
-                    <p>${proj.description}</p>
-                    <div class="tags">
-                        ${proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                    </div>
-                    ${proj.link ? `<div class="pub-links"><a href="${proj.link}" class="pub-link" target="_blank">🔗 View Project</a></div>` : ''}
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${proj.title}</h3>
+                <div class="card-content">${proj.description}</div>
+                <div class="tags">
+                    ${proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
+                ${proj.link ? `<div class="pub-links" style="margin-top: 1rem;"><a href="${proj.link}" class="pub-link paper" target="_blank">🔗 View Project</a></div>` : ''}
             `;
+            projList.appendChild(card);
         });
 
-        // Render blog
+        // Blog
         const blogList = document.getElementById('blogList');
         config.blog.forEach(post => {
-            blogList.innerHTML += `
-                <div class="blog-item fade-in">
-                    <h3>${post.title}</h3>
-                    <p class="meta">${post.date}</p>
-                    <p>${post.excerpt}</p>
-                    ${post.link ? `<div class="pub-links"><a href="${post.link}" class="pub-link">📖 Read More</a></div>` : ''}
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${post.title}</h3>
+                <div class="card-meta">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                    </svg>
+                    ${post.date}
                 </div>
+                <div class="card-content">${post.excerpt}</div>
+                ${post.link ? `<div class="pub-links"><a href="${post.link}" class="pub-link paper" target="_blank">📖 Read More</a></div>` : ''}
             `;
+            blogList.appendChild(card);
         });
 
-        // Render contact info
+        // Contact Info
         const contactInfo = document.getElementById('contactInfo');
-        contactInfo.innerHTML = `
-            <div class="contact-item">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                <a href="mailto:${config.contact.email}">${config.contact.email}</a>
-            </div>
-            <div class="contact-item">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                <span>${config.contact.phone}</span>
-            </div>
-            <div class="contact-item">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                <span>${config.contact.location}</span>
-            </div>
-        `;
+        const contacts = [
+            {
+                icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>',
+                label: 'Email',
+                value: config.contact.email,
+                link: `mailto:${config.contact.email}`
+            },
+            {
+                icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>',
+                label: 'Phone',
+                value: config.contact.phone,
+                link: `tel:${config.contact.phone}`
+            },
+            {
+                icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>',
+                label: 'Location',
+                value: config.contact.location,
+                link: null
+            }
+        ];
 
+        contacts.forEach(contact => {
+            const item = document.createElement('div');
+            item.className = 'contact-item';
+            const content = contact.link 
+                ? `<a href="${contact.link}">${contact.value}</a>`
+                : `<span style="font-weight: 500; color: var(--text-primary);">${contact.value}</span>`;
+            
+            item.innerHTML = `
+                <div class="contact-item-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">${contact.icon}</svg>
+                </div>
+                <div class="contact-item-content">
+                    <span style="display: block; margin-bottom: 0.25rem;">${contact.label}</span>
+                    ${content}
+                </div>
+            `;
+            contactInfo.appendChild(item);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Contact form
         function handleContact() {
             const name = document.getElementById('contactName').value;
             const email = document.getElementById('contactEmail').value;
             const message = document.getElementById('contactMessage').value;
             
             if (name && email && message) {
-                window.location.href = `mailto:${config.contact.email}?subject=Contact from ${name}&body=${message}`;
+                window.location.href = `mailto:${config.contact.email}?subject=Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
             } else {
                 alert('Please fill in all fields');
             }
         }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
     </script>
 </body>
 </html>
